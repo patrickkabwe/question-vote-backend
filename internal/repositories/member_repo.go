@@ -10,7 +10,7 @@ type MemberRepo struct {
 	db *database.DB
 }
 
-func NewMemberRepo(db *database.DB) types.Repo {
+func NewMemberRepo(db *database.DB) types.Repository {
 	return &MemberRepo{
 		db: db,
 	}

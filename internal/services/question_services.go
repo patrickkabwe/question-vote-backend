@@ -13,10 +13,10 @@ type QuestionService interface {
 }
 
 type questionService struct {
-	questionRepo types.Repo
+	questionRepo types.Repository
 }
 
-func NewQuestionService(questionRepo types.Repo) QuestionService {
+func NewQuestionService(questionRepo types.Repository) QuestionService {
 	return &questionService{
 		questionRepo: questionRepo,
 	}

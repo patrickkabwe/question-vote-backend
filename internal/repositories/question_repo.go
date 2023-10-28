@@ -9,7 +9,7 @@ type QuestionRepo struct {
 	db *database.DB
 }
 
-func NewQuestionRepo(db *database.DB) types.Repo {
+func NewQuestionRepo(db *database.DB) types.Repository {
 	return &QuestionRepo{
 		db: db,
 	}

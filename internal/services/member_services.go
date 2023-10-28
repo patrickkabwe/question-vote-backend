@@ -11,10 +11,10 @@ type MemberService interface {
 }
 
 type memberService struct {
-	memberRepo types.Repo
+	memberRepo types.Repository
 }
 
-func NewMemberService(repo types.Repo) MemberService {
+func NewMemberService(repo types.Repository) MemberService {
 	return &memberService{
 		memberRepo: repo,
 	}

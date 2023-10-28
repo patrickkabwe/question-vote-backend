@@ -8,13 +8,13 @@ import (
 	"net/http"
 	"net/http/httptest"
 	"testing"
+	"vote-app/cmd/vote"
 	"vote-app/internal/handlers"
 	"vote-app/internal/models"
 	"vote-app/internal/routes"
 	"vote-app/internal/services"
 	"vote-app/mocks"
 	"vote-app/types"
-	"vote-app/utils"
 )
 
 func TestMemberHandler_Register(t *testing.T) {
@@ -38,7 +38,7 @@ func TestMemberHandler_Register(t *testing.T) {
 		},
 	}
 
-	app := utils.CreateApp()
+	app := main.CreateApp()
 	memberRepo := mocks.NewRepo()
 	memberService := services.NewMemberService(memberRepo)
 	memberHandler := handlers.NewMemberHandler(memberService)

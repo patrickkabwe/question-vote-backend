@@ -5,7 +5,6 @@ import (
 	"os"
 	"vote-app/database"
 	"vote-app/internal/routes"
-	"vote-app/utils"
 )
 
 func main() {
@@ -13,7 +12,7 @@ func main() {
 	if port == "" {
 		port = "5000"
 	}
-	app := utils.CreateApp()
+	app := CreateApp()
 	db, err := database.Connect()
 	if err != nil {
 		log.Fatalln(err)

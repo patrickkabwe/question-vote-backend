@@ -1,8 +1,10 @@
-package utils
+package main
 
 import (
+	"github.com/gofiber/contrib/swagger"
 	"github.com/gofiber/fiber/v2"
 	"github.com/gofiber/fiber/v2/middleware/logger"
+	"vote-app/docs"
 )
 
 func CreateApp() *fiber.App {
@@ -13,7 +15,7 @@ func CreateApp() *fiber.App {
 			Format: "[${time}] ${status} - ${latency} ${method} ${path}\n",
 		}))
 
-	//app.Use(swagger.New(docs.Config))
+	app.Use(swagger.New(docs.Config))
 
 	return app
 }
