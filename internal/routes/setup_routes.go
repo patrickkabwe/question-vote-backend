@@ -8,7 +8,7 @@ import (
 	"vote-app/internal/services"
 )
 
-func SetupRoutes(db *database.DB, app *fiber.App) {
+func SetupRoutes(db *database.Database, app *fiber.App) {
 	// register resources
 	memberRepo := repositories.NewMemberRepo(db)
 	memberService := services.NewMemberService(memberRepo)

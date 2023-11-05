@@ -9,10 +9,10 @@ type VoteService interface {
 }
 
 type voteService struct {
-	db *database.DB
+	db *database.Database
 }
 
-func NewVoteService(db *database.DB) VoteService {
+func NewVoteService(db *database.Database) VoteService {
 	return &voteService{
 		db: db,
 	}

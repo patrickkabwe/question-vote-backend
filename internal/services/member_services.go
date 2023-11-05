@@ -1,6 +1,8 @@
 package services
 
 import (
+	"errors"
+	"gorm.io/gorm"
 	"vote-app/internal/models"
 	"vote-app/types"
 )
@@ -20,16 +22,24 @@ func NewMemberService(repo types.Repository) MemberService {
 	}
 }
 
-func (m memberService) FindByEmail(email string) (models.Member, error) {
+func (m *memberService) FindByEmail(email string) (models.Member, error) {
 	filter := map[string]interface{}{"email": email}
 	user, err := m.memberRepo.FindOne(filter)
-	if err != nil {
-		return models.Member{}, err
-	}
-	return user.(models.Member), nil
+	return m.checkError(user, err)
 }
 
-func (m memberService) FindById(id string) (models.Member, error) {
-	//TODO implement me
-	panic("implement me")
+func (m *memberService) FindById(id string) (models.Member, error) {
+	user, err := m.memberRepo.FindById(id)
+	return m.checkError(user, err)
+}
+
+func (m *memberService) checkError(user any, err error) (models.Member, error) {
+	switch {
+	case err == nil:
+		return user.(models.Member), nil
+	case errors.Is(err, gorm.ErrRecordNotFound):
+		return models.Member{}, errors.New("user not found")
+	default:
+		return models.Member{}, errors.New("something went wrong")
+	}
 }

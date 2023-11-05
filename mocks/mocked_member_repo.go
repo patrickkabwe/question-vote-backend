@@ -14,12 +14,12 @@ func NewRepo() *MockedMemberRepo {
 	return &MockedMemberRepo{}
 }
 
-func (r *MockedMemberRepo) Save(data any) (any, error) {
+func (r *MockedMemberRepo) Create(data any) (any, error) {
 	//TODO implement me
 	panic("implement me")
 }
 
-func (r *MockedMemberRepo) Update(id string, data any) (any, error) {
+func (r *MockedMemberRepo) Update(id int64, data any) (any, error) {
 	//TODO implement me
 	panic("implement me")
 }
@@ -30,8 +30,8 @@ func (r *MockedMemberRepo) Delete(id string) (any, error) {
 }
 
 func (r *MockedMemberRepo) FindById(id string) (any, error) {
-	//TODO implement me
-	panic("implement me")
+	args := r.Called(id)
+	return args.Get(0).(models.Member), args.Error(1)
 }
 
 func (r *MockedMemberRepo) FindOne(filter map[string]any) (any, error) {
@@ -39,7 +39,7 @@ func (r *MockedMemberRepo) FindOne(filter map[string]any) (any, error) {
 	return args.Get(0).(models.Member), args.Error(1)
 }
 
-func (_m *MockedMemberRepo) FindAll(filter map[string]any) (any, error) {
+func (r *MockedMemberRepo) FindAll(filter map[string]any) (any, error) {
 	//TODO implement me
 	panic("implement me")
 }

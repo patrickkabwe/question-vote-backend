@@ -6,21 +6,21 @@ import (
 )
 
 type QuestionRepo struct {
-	db *database.DB
+	db *database.Database
 }
 
-func NewQuestionRepo(db *database.DB) types.Repository {
+func NewQuestionRepo(db *database.Database) types.Repository {
 	return &QuestionRepo{
 		db: db,
 	}
 }
 
-func (q *QuestionRepo) Save(data any) (any, error) {
+func (q *QuestionRepo) Create(data any) (any, error) {
 	//TODO implement me
 	return QuestionRepo{}, nil
 }
 
-func (q *QuestionRepo) Update(id string, data any) (any, error) {
+func (q *QuestionRepo) Update(id int64, data any) (any, error) {
 	//TODO implement me
 	panic("implement me")
 }

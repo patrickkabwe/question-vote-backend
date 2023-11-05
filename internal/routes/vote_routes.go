@@ -7,7 +7,7 @@ import (
 	"vote-app/internal/services"
 )
 
-func VoteRoutes(db *database.DB, app *fiber.App) {
+func VoteRoutes(db *database.Database, app *fiber.App) {
 	// register resources
 	voteService := services.NewVoteService(db)
 	voteHandler := handlers.NewVoteHandler(voteService)

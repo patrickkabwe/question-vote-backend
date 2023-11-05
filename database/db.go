@@ -4,22 +4,41 @@ import (
 	"gorm.io/driver/postgres"
 	"gorm.io/gorm"
 	"gorm.io/gorm/logger"
+	"vote-app/internal/models"
 )
 
-type DB struct {
+type Database struct {
 	*gorm.DB
 }
 
-func Connect() (*DB, error) {
-	dbUrl := "postgres://postgres:postgres@localhost:5432/vote?sslmode=disable"
-	db, err := gorm.Open(postgres.Open(dbUrl), &gorm.Config{
+func Connect(dbUrl string) (*Database, error) {
+	_db, err := gorm.Open(postgres.Open(dbUrl), &gorm.Config{
 		Logger: logger.Default.LogMode(logger.Info),
 	})
-	return &DB{
-		DB: db,
+
+	if err != nil {
+		return nil, err
+	}
+
+	return &Database{
+		DB: _db,
 	}, err
 }
 
-func (db *DB) Close() {
+func (db *Database) Migrate() error {
+	err := db.AutoMigrate(
+		&models.Member{},
+	)
+	if err != nil {
+		return err
+	}
+	return nil
+}
 
+func (db *Database) Close() {
+	sqlDB, _ := db.DB.DB()
+	err := sqlDB.Close()
+	if err != nil {
+		return
+	}
 }
